@@ -47,14 +47,16 @@ radio.openWritingPipe(pipe);}
 
 void loop(void){
 
-int ldr2Status = analogRead(ldr2Pin);
-
-if (ldr2Status < 300) { //Laser is on
-
-msg[0] = 111;
-
-radio.write(msg, 1);
-
-}
-
+  int ldr2Status = analogRead(ldr2Pin);
+  Serial.println(ldr2Status);
+  if (ldr2Status < 300) {
+    Serial.println("detected!");
+    msg[0] = 111;
+    radio.write(msg, 1);
+  }
+  else {
+    msg[0] = 101;
+    
+    radio.write(msg, 1);
+  }
 }
